@@ -1,0 +1,117 @@
+create table tb_clientes(
+idClientes INT,
+Nome VARCHAR(50),
+CPF VARCHAR(50),
+RG VARCHAR(50),
+Data_Nascimento date,
+Sexo varchar(1),
+ProfissÃ£o VARCHAR(50),
+Nacionalidade varchar(50),
+Logradouro varchar(50),
+NÃºmero INT,
+Complemento varchar(30),
+Bairro varchar(30),
+MunicÃ­pio varchar(30),
+UF VARCHAR(2)
+);
+
+insert INTO tb_clientes (idClientes,Nome,CPF,RG,Data_Nascimento,Sexo,ProfissÃ£o,Nacionalidade,Logradouro,NÃºmero,Complemento,Bairro,MunicÃ­pio,UF)
+values ('1','Manoel',88828383821,'32323','2001-10-10','M','Estudante','Brasileira','Rua Joaquin Nabuco','23','Casa','Cidade Nova','Porto UniÃ£o','SC'),
+('2','Geraldo','12343299291','56565','1987-01-04','M','Engenheiro','Brasileira','Rua das Limas',200,'Ap.','Centro','P. UniÃ£o','SC'),
+('3','Carlos','87732323227','55463','1967-10-01','M','Pedreiro','Brasileira','Rua das Laranjeiras',300,'Apart.','Cto.','Canoinhas','SC'),
+('4','Adriana','12321222122','98777','1989-09-10','F','Jornalista','Brasileira','Rua das Limas',240,'Casa','SÃ£o Pedro','Porto VitÃ³ria','PR'),
+('5','Amanda','99982838828','28382','1991-03-04','F','Jorn.','Italiana','Av. Central',100,'','SÃ£o Pedro','General Carneiro','PR'),('6','Ã‚ngelo','99982828181','12323','2000-01-01','M','Professor','Brasileiro','Av. Beira Mar',300,'','Ctr.','SÃ£o Paulo','SP'),
+('7','Anderson','','',null,'M','Prof.','Italiano','Av. Brasil',100,'Apartamento','Santa Rosa','Rio de Janeiro','SP'),
+('8','Camila','9998282828','','2001-10-10','F','Professora','Norte americana','Rua Central',4333,'','Centro','UberlÃ¢ndia','MG'),
+('9','Cristiano','','',null,'M','Estudante','AlemÃ£','Rua do Centro',877,'Casa','Centro','Porto Alegre','RS'),
+('10','FabrÃ­cio','8828282828','32323',null,'M','Estudante','Brasileiro','',null,'','','PU','SC'),
+('11','Fernanda','','',null,'F','','Brasileira','',null,'','','Porto UniÃ£o','SC'),
+('12','Gilmar','88881818181','888','2000-02-10','M','Estud.','','Rua das Laranjeiras',200,'','C. Nova','Canoinhas','SC'),
+('13','Diego','1010191919','111939',null,'M','Professor','AlemÃ£o','Rua Central',455,'Casa','Cidade N.','SÃ£o Paulo','SP'),
+('14','Jeferson','','','1983-07-01','M','','Brasileiro','',null,'','','UniÃ£o da VitÃ³ria','PR'),
+('15','Jessica','','',null,'F','Estudante','','',null,'','','UniÃ£o da VitÃ³ria','PR');
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+ORDER BY nome DESC;
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+WHERE nome LIKE '%R%';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where nome like '%c%';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where Bairro = 'centro';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where Complemento LIKE '%A%';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where Sexo = 'F';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where CPF = '';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+ORDER BY ProfissÃ£o asc;
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where Nacionalidade like '%Brasileir%';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where NÃºmero is not null;
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where UF = 'SC';
+
+SELECT Nome,Sexo,ProfissÃ£o
+FROM tb_clientes
+where Data_Nascimento = '2000-01-01'and'2002-01-01';
+
+SELECT Nome, CONCAT(Logradouro, ', ', NÃºmero, ', ',
+ IFNULL(Complemento, ''), ', ', Bairro, ', ', MunicÃ­pio, ', ', UF) AS EnderecoCompleto
+FROM tb_clientes;
+
+SET SQL_SAFE_UPDATES = 0;
+
+insert INTO tb_clientes (idClientes,Nome,CPF,RG,Data_Nascimento,Sexo,ProfissÃ£o,Nacionalidade,Logradouro,NÃºmero,Complemento,Bairro,MunicÃ­pio,UF) 
+values ('16','Maicon','12349596421','1234','1965-10-10','F','EmpresÃ¡rio','','',null,'','','FlorianÃ³polis','PR'),
+('17','GetÃºlio','','4631',null,'F','Estudante','Brasileira','Rua Central',343,'Apartamento','Centro','Curitiba','SC'),
+('18','Sandra',null,'',null,'M','Professor','Italiana','',12,'Bloco A','','','');
+
+UPDATE tb_clientes
+SET CPF = '45390569432',
+    Sexo = 'M',
+    Nacionalidade = 'Brasileira',
+    UF = 'SC'
+WHERE idClientes = 16;
+
+UPDATE tb_clientes
+SET Data_Nascimento = '1974-04-01',
+    Sexo = 'M'
+WHERE idClientes = 17;
+
+UPDATE tb_clientes
+SET Sexo = 'F',
+    ProfissÃ£o = 'Professora',
+    NÃºmero = 123
+WHERE idClientes = 18;
+
+DELETE FROM tb_clientes
+WHERE idClientes = 16;
+
+DELETE FROM tb_clientes
+WHERE Nome = 'Sandra';
+
+SET SQL_SAFE_UPDATES = 1;
